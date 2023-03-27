@@ -29,6 +29,11 @@ class CfgFunctions
         class functions
         {
 			
+            class ship_camera_clear
+            {
+                file = "\SSV_Aux_Ship\functions\fn_ship_camera_clear.sqf";
+            };
+
             class ship_camera
             {
                 file = "\SSV_Aux_Ship\functions\fn_ship_camera.sqf";
@@ -100,7 +105,7 @@ class cfgVehicles
 				condition = "alive _target";
 				displayName = "Return To Ship";
 				// icon = "\a3\ui_f\data\IGUI\Cfg\Actions\periscopedepth_on_ca.paa";
-				statement = "[(_this select 0), _player, -1] call SSV_Aux_fnc_ship_handleIntoTurret";
+				statement = "[(_this select 0), _player, -1] call SSV_Aux_fnc_ship_handleIntoTurret; [(_target getVariable ""ssv_aux_ship"")] call SSV_Aux_fnc_ship_camera";
 			};
 		};
 	};
@@ -123,12 +128,19 @@ class cfgVehicles
 		class Sounds {}; // clear sounds
 		class ACE_SelfActions
 		{
-			class SSV_Aux_Ship_Camera
+			class SSV_Aux_Ship_Camera_Enter
 			{
 				condition = "alive _target";
-				displayName = "Swap To Camera";
+				displayName = "Enter Camera";
 				// icon = "\a3\ui_f\data\IGUI\Cfg\Actions\periscopedepth_on_ca.paa";
 				statement = "[_target] call SSV_Aux_fnc_ship_camera";
+			};
+			class SSV_Aux_Ship_Camera_Leave
+			{
+				condition = "alive _target";
+				displayName = "Leave Camera";
+				// icon = "\a3\ui_f\data\IGUI\Cfg\Actions\periscopedepth_on_ca.paa";
+				statement = "[(_this select 0), _player, -2] call SSV_Aux_fnc_ship_handleIntoTurret";
 			};
 			class SSV_Aux_Ship_Stop
 			{
@@ -157,6 +169,13 @@ class cfgVehicles
 				displayName = "Start Ship Impulse";
 				// icon = "\a3\ui_f\data\IGUI\Cfg\Actions\periscopedepth_on_ca.paa";
 				statement = "_target setVariable [""ssv_aux_ship_move"", true]";
+			};
+			class SSV_Aux_Ship_Impulse_Up
+			{
+				condition = "alive _target";
+				displayName = "Ship Impulse Up";
+				// icon = "\a3\ui_f\data\IGUI\Cfg\Actions\periscopedepth_on_ca.paa";
+				statement = "_target setVelocity [0,0,150]; _target setVariable [""ssv_aux_ship_move"", true]";
 			};
 			class SSV_Aux_Ship_Turret_1
 			{

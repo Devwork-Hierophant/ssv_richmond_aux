@@ -14,7 +14,7 @@ private _ship = [_vehicle, _shipType] call SSV_Aux_fnc_ship_model;
 //     };
 // } forEach crew _vehicle;
 
-// [_vehicle] spawn SSV_Aux_fnc_ship_move;
+[_vehicle] spawn SSV_Aux_fnc_ship_move;
 [_vehicle] call SSV_Aux_fnc_ship_turrets;
 // [_vehicle] call SSV_Aux_fnc_ship_camera;
 

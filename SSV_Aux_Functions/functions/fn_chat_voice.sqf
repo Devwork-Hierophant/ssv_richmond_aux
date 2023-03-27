@@ -21,7 +21,7 @@ if (is3DEN) exitWith {};
 // diag_log format ["Sound playing is %1", _sound];
 
 if (_global) exitWith {
-	private _maxDistance = [(configFile >> "cfgSounds" >> _sound), "maxDistance", 20] call BIS_fnc_returnConfigEntry;
+	private _maxDistance = [(configFile >> "cfgSounds" >> _sound), "maxDistance", 40] call BIS_fnc_returnConfigEntry;
 	[ _object, [_sound, _maxDistance, 1] ] remoteExec ["say"];
 };
 

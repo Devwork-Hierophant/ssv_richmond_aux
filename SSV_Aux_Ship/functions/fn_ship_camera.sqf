@@ -38,5 +38,5 @@ params ["_vehicle"];
         // doesn't work
     },
     [_vehicle],
-    0.5
+    0.1
 ] call CBA_fnc_waitAndExecute;
