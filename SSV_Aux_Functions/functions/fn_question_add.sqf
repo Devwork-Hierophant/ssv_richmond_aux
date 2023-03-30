@@ -49,4 +49,4 @@ private _actionInfo = [
 
 private _action = _actionInfo call ace_interact_menu_fnc_createAction;
 // ["CAManBase", 0, ["ACE_MainActions", "SSV_Aux_Questions"], _action, true] call ace_interact_menu_fnc_addActionToClass;
-[_unit, 0, ["SSV_Aux_Questions"], _action] remoteExec ["ace_interact_menu_fnc_addActionToObject"];
+[_unit, 0, ["SSV_Aux_Questions"], _action] call ace_interact_menu_fnc_addActionToObject;

@@ -6,7 +6,7 @@ if (is3DEN) exitWith {};
 
 private _ship = [_vehicle, _shipType] call SSV_Aux_fnc_ship_model;
 
-// _ship setVariable ["ssv_aux_ship", _vehicle, true];
+_vehicle setVariable ["ssv_aux_ship", _ship, true];
 
 // {
 //     if (_x != driver _vehicle) then {
