@@ -1,5 +1,7 @@
 params ["_vehicle"];
 
+if !(isServer) exitWith {};
+
 [_vehicle] spawn SSV_Aux_fnc_ship_alarm;
 
 _vehicle setVariable ["ssv_aux_ship_move", false];
@@ -10,14 +12,14 @@ _vehicle setDamage 0.1;
 
 _vehicle allowDamage false;
 
-private _particleFire = "test_EmptyObjectForFireBig" createVehicle [0,0,0];
-private _particleSmoke = "test_EmptyObjectForSmoke" createVehicle [0,0,0];
+// private _particleFire = "test_EmptyObjectForFireBig" createVehicle [0,0,0];
+// private _particleSmoke = "test_EmptyObjectForSmoke" createVehicle [0,0,0];
 
-_particleFire setPosATL getPosATL _vehicle;
-_particleFire attachTo [_vehicle, [0, 5, 0]];
+// _particleFire setPosATL getPosATL _vehicle;
+// _particleFire attachTo [_vehicle, [0, 5, 0]];
 
-_particleSmoke setPosATL getPosATL _vehicle;
-_particleSmoke attachTo [_vehicle, [0, 5, 0]];
+// _particleSmoke setPosATL getPosATL _vehicle;
+// _particleSmoke attachTo [_vehicle, [0, 5, 0]];
 
 for "_i" from 1 to 10 do
 {
@@ -38,44 +40,26 @@ waitUntil {(getPosATL _vehicle) select 2 <= 100};
 // {
 // };
 
-private _bomb = "SSV_Aux_Ship_Explode" createVehicle [0,0,0];
-_bomb setPosATL (_vehicle modelToWorld [0, -5, -3]);
-// _bomb setDir getDir _vehicle;
-_bomb setDamage 1;
-
-deleteVehicle _particleFire;
-deleteVehicle _particleSmoke;
-
-_vehicle enableSimulation false;
-
-private _vehiclePos = getPosATL _vehicle;
-
-private _ship = _vehicle getVariable ["ssv_aux_ship", objNull];
-
 private _soundObject = "#particlesource" createVehicle [0,0,0];
-_soundObject setPosATL _vehiclePos;
+_soundObject setPosATL getPosATL _vehicle;
 _soundObject allowDamage false;
 _soundObject enableSimulation false;
 
+[_vehicle] remoteExec ["SSV_Aux_fnc_ship_delete", _vehicle];
+
+private _bomb = "SSV_Aux_Ship_Explode" createVehicle [0,0,0];
+_bomb setPosATL (_soundObject modelToWorld [0, -5, -3]);
+// _bomb setDir getDir _vehicle;
+_bomb setDamage 1;
+
+// deleteVehicle _particleFire;
+// deleteVehicle _particleSmoke;
+
+private _vehiclePos = getPosATL _soundObject;
+
+// [_vehicle] call SSV_Aux_fnc_ship_delete;
+
 [_soundObject, "SSV_Aux_Ship_Explosion", true] call SSV_Aux_fnc_playSound;
-
-hint str [_vehicle, _ship, (_vehicle getVariable ["ssv_aux_ship_turret_1", objNull]), (_vehicle getVariable ["ssv_aux_ship_turret_2", objNull])];
-
-detach _ship;
-detach (_vehicle getVariable ["ssv_aux_ship_turret_1", objNull]);
-detach (_vehicle getVariable ["ssv_aux_ship_turret_2", objNull]);
-
-_ship setPosATL [0,0,0];
-(_vehicle getVariable ["ssv_aux_ship_turret_1", objNull]) setPosATL [0,0,0];
-(_vehicle getVariable ["ssv_aux_ship_turret_2", objNull]) setPosATL [0,0,0];
-
-// arma fuckery
-
-deleteVehicle _ship;
-deleteVehicle (_vehicle getVariable ["ssv_aux_ship_turret_1", objNull]);
-deleteVehicle (_vehicle getVariable ["ssv_aux_ship_turret_2", objNull]);
-
-deleteVehicle _vehicle;
 
 for "_w" from 1 to 100 do
 {

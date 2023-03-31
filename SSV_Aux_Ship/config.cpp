@@ -44,6 +44,16 @@ class CfgFunctions
                 file = "\SSV_Aux_Ship\functions\fn_ship_camera.sqf";
             };
 
+            class ship_delete
+            {
+                file = "\SSV_Aux_Ship\functions\fn_ship_delete.sqf";
+            };
+
+            class ship_destroy_init
+            {
+                file = "\SSV_Aux_Ship\functions\fn_ship_destroy_init.sqf";
+            };
+
             class ship_destroy
             {
                 file = "\SSV_Aux_Ship\functions\fn_ship_destroy.sqf";
@@ -196,7 +206,7 @@ class cfgVehicles
 				condition = "alive _target";
 				displayName = "Trigger Destruct Sequence";
 				// icon = "\a3\ui_f\data\IGUI\Cfg\Actions\periscopedepth_on_ca.paa";
-				statement = "[_target] spawn SSV_Aux_fnc_ship_destroy";
+				statement = "[_target] call SSV_Aux_fnc_ship_destroy_init";
 			};
 			class SSV_Aux_Ship_Turret_1
 			{
@@ -272,8 +282,8 @@ class Extended_Init_EventHandlers
 	{
 		class SSV_Aux_Ship_Init
 		{
-			// init = "[(_this select 0), ""Land_MEOP_build_Ship_Izmail""] call SSV_Aux_fnc_ship_init";
-			init = "[(_this select 0), ""Land_BellTower_02_V1_F""] call SSV_Aux_fnc_ship_init"; // debug purposes
+			init = "[(_this select 0), ""Land_MEOP_build_Ship_Izmail""] call SSV_Aux_fnc_ship_init";
+			// init = "[(_this select 0), ""Land_BellTower_02_V1_F""] call SSV_Aux_fnc_ship_init"; // debug purposes
 		};
 	};
 	class SSV_Aux_Kilimanjaro

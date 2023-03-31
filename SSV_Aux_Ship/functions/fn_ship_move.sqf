@@ -1,7 +1,7 @@
 params ["_vehicle"];
 
-_vehicle setVelocity [0,0,0];
-_vehicle engineOn false;
+// _vehicle setVelocity [0,0,0];
+// _vehicle engineOn false;
 
 while {alive _vehicle} do {
 
