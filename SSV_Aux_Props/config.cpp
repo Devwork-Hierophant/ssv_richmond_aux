@@ -7,7 +7,9 @@ class CfgPatches
 			"Land_Tablet_01_F",
 			"SSV_Prop_SmallBox",
 			"SSV_Prop_LargeBox",
-			"SSV_Prop_MedicBox"
+			"SSV_Prop_MedicBox",
+			"SSV_Prop_ArmorBox",
+			"SSV_Drone_Cargo"
 		};
 		weapons[] =
 		{
@@ -37,6 +39,14 @@ class CfgEditorCategories
 	};
 };
 
+class CfgEditorSubcategories
+{
+	class SSV_Aux_Drones
+	{
+		displayName = "Drones";
+	};
+};
+
 class cfgVehicles
 {
 	class Thing;
@@ -59,6 +69,24 @@ class cfgVehicles
 		class TransportMagazines {};
 		class TransportWeapons {};
 		// clear items
+	};
+
+	class B_UAV_01_F;
+	class SSV_Drone_Base : B_UAV_01_F
+	{
+		scope = 0;
+		faction = "MEOP_human";
+		editorSubcategory = "SSV_Aux_Drones";
+		aileronSensitivity = 0.6; // 0.5 is blackfish default
+		elevatorSensitivity = 0.6; // 0.5 is blackfish default
+	};
+
+	class SSV_Drone_Cargo : SSV_Drone_Base
+	{
+		scope = 2;
+		scopeCurator = 2;
+		model = "SSV_Aux_Props\cargo_drone";
+		displayName = "Cargo Drone";
 	};
 
 	class Land_Tablet_01_F : SSV_Prop_Base
@@ -97,5 +125,12 @@ class cfgVehicles
 		scopeCurator = 2;
 		model = "SSV_Aux_Props\medic_box";
 		displayName = "Medical Box";
+	};
+	class SSV_Prop_ArmorBox : SSV_Prop_Cargo_Base
+	{
+		scope = 2;
+		scopeCurator = 2;
+		model = "SSV_Aux_Props\armor_box";
+		displayName = "Armor Box";
 	};
 };
